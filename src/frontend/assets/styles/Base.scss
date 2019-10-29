@@ -1,0 +1,22 @@
+// @import './Vars.scss';
+// @import './Media.scss';
+
+body {
+  margin: 0;
+  background-color: $main-color;
+  color: white;
+  font-family: $theme-font;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.flex, .main, .header__menu--profile, .header {
+  display: flex;
+  align-items: center;
+}
+
+figure {
+  margin: 0;
+}
