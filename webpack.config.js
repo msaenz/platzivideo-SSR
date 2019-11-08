@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
+// const TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 dotenv.config();
 const isProd = process.env.NODE_ENV === "production";
@@ -48,14 +49,14 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.(js|jsx)$/,
-      //   exclude: /node_modules/,
-      //   enforce: 'pre',
-      //   use: {
-      //     loader: 'eslint-loader'
-      //   },
-      // },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        enforce: 'pre',
+        use: {
+          loader: 'eslint-loader'
+        },
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -112,6 +113,7 @@ module.exports = {
       test: /\.js$|\.css$/,
       filename: "[path].gz"
     }) : false,
-    isProd ? new ManifestPlugin() : false,
+    // isProd ? new ManifestPlugin() : false,
+    isProd ? new ManifestPlugin() : {},
   ],
 };
