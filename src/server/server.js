@@ -2,22 +2,25 @@ import express from "express";
 import dotenv from "dotenv";
 import webpack from "webpack";
 import helmet from "helmet";
+import axios from 'axios';
 import passport from "passport";
+import boom from "@hapi/boom";
+import cookieParser from "cookie-parser";
+import path from "path";
 import main from "./routes/main";
-// import 'regenerator-runtime/runtime';
-
-const axios = require("axios");
-const boom = require("@hapi/boom");
-
-require("./utils/auth/strategies/basic");
 
 dotenv.config();
 
 const ENV = process.env.NODE_ENV;
+const app = express();
 const PORT = process.env.PORT || 3000;
 
-const app = express();
-app.use(express.static(`${__dirname}/public`));
+app.use(express.json());
+app.use(cookieParser());
+app.use(passport.initialize())
+app.use(passport.session())
+// app.use(express.static(`${__dirname}/public`));
+app.use(express.static(path.join(__dirname, 'public')));
 
 if (ENV === "development") {
   console.log("Loading Development config");
@@ -32,7 +35,10 @@ if (ENV === "development") {
     publicPath: webPackConfig.output.publicPath,
     hot: true,
     historyApiFallback: true,
-    stats: { colors: true }
+    stats: { colors: true },
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    },
   };
   app.use(webpackDevMiddleware(compiler, serverConfig));
   app.use(webpackHotMiddleware(compiler));
@@ -66,35 +72,43 @@ app.get("*.css", (req, res, next) => {
   next();
 });
 
-// basic startegic
+// basic strategic
+require("./utils/auth/strategies/basic");
 
-app.post("/auth/sign-in", async (req, res, next) => {
+app.post("/api/auth/sign-in", async (req, res, next) => {
   passport.authenticate("basic", async (error, data) => {
     try {
       if (error || !data) {
         next(boom.unauthorized());
       }
-      req.logIn(data, { session: false }, async error => {
+      req.login(data, { session: false }, async (error) => {
         if (error) {
           next(error);
         }
+        console.log("Datos autenticación  server", data)
+        const { token, ...user } = data;
+
         res.cookie("token", token, {
           httpOnly: !(ENV === "development"),
-          secure: !(ENV === "development")
+          secure: !(ENV === "development"),
         });
         res.status(200).json(user.user);
       });
     } catch (error) {
       next(error);
     }
-  });
+  })(req, res, next);
 });
 
+// app.post("/api/auth/sign-up", async (req, res, next) => {
 app.post("/auth/sign-up", async (req, res, next) => {
+  console.log("Registro Usuario server?")
   const { body: user } = req;
+  console.log("User", user)
   try {
-    await axios({
-      url: `${config.apiUrl}/api/auth/sign-up`,
+    console.log("URL", `${process.env.API_URL}/api/auth/sign-up`)
+    const userData = await axios({
+      url: `${process.env.API_URL}/api/auth/sign-up`,
       method: "post",
       data: user
     });
@@ -104,6 +118,25 @@ app.post("/auth/sign-up", async (req, res, next) => {
       id: userData.data.data,
       message: "user created"
     });
+  } catch (error) {
+    next(error);
+
+  }
+});
+
+app.get("/products/category/:id", async (req, res, next) => {
+  console.log("Registro Usuario server?")
+  const { id } = req.params;
+  console.log("Categoria", id)
+  try {
+    console.log("URL", `${process.env.API_URL}/api/products/category/${id}`)
+    const prodCatg = await axios({
+      url: `${process.env.API_URL}/api/products/category/${id}`,
+      method: "get",
+    });
+    console.log("Datos...", prodCatg.data)
+    const { data } = prodCatg.data;
+    res.status(200).json(data);
   } catch (error) {
     next(error);
   }

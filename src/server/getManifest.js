@@ -9,6 +9,7 @@ const getManifest = () => {
     }
   } catch (err) {
     console.log(err);
+    return err
   }
 };
 

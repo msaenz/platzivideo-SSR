@@ -1,10 +1,13 @@
 import passport from "passport";
 import { BasicStrategy } from "passport-http";
 import boom from "@hapi/boom";
+import dotenv from 'dotenv';
 import axios from "axios";
-import config from "../../../config";
-import "regenerator-runtime/runtime";
+dotenv.config();
+// import config from "../../../config";
+// import "regenerator-runtime/runtime";
 
+console.log( `Ruta-basic---${process.env.API_URL}/api/auth/sign-in`)
 passport.use(
   new BasicStrategy(async (email, password, cb) => {
     try {
@@ -16,10 +19,10 @@ passport.use(
           username: email,
         },
         data: {
-          apiKeyToken: config.apiKeyToken,
+          apiKeyToken: process.env.API_KEY_TOKEN, 
         }
       });
-
+      console.log("Respuesta", data) 
       if (!data || status !== 200) {
         return cb(boom.unauthorized("Autenticacion rechazada"), false);
       }

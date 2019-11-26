@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { getVideoSource } from "../actions";
 import "../assets/styles/components/Player.scss";
@@ -8,14 +7,14 @@ import NotFound from "./NotFound";
 const Player = (props) => {
   const { id } = props.match.params;
   const hasPlaying = Object.keys(props.playing).length > 0;
-
+  console.log("HasPlayer ", hasPlaying)
   useEffect(() => {
     props.getVideoSource(id);
   }, []);
   return hasPlaying ? (
     <div className="Player">
       <video controls autoPlay>
-        <source src={props.playing.source} type="video/mp4" />
+        <source src={props.playing.origin} />
       </video>
       <div className="Player-back">
         <button
@@ -32,10 +31,6 @@ const Player = (props) => {
     <NotFound />
   );
 };
-
-Player.propTypes = {
-  getVideoSource: PropTypes.func,
-}
 
 const mapStateToProps = (state) => {
   return {

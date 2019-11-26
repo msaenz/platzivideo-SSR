@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  height: inherit;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1em 2em;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  vertical-align: middle;
+}
+
+::placeholder {
+  color: white;
+}
+
+video {
+  width: 430px;
+  height: 280px;
+  border: 1px solid black;
+  padding: 0;
+  margin: 0;
+  /* width: 427px;
+  height: 240px; */
+  background-color: black;
+  margin: auto;
+  float: left;
+  /* object-fit: contain; */
+}
+
+video:hover .Player-back {
+  display: block;
+}
+
+.Player-back {
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  font-size: 12px;
+}
+
+.Player-back button {
+  text-decoration: none;
+  color: white;
+  background: rgba(0, 0, 0, .3);
+  padding: 5px;
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}

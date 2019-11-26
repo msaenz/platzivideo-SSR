@@ -1,10 +1,11 @@
 import React from "react";
-import "../assets/styles/components/Categories.scss";
+import "./styles/Categories.scss";
 
-const Categories = ({ children, title }) => (
-  <div className="categories">
-    <h2 className="categories_title">{title}</h2>
+const Categories = ({ idcategory, children, title }) => (
+  <div className="category">
+    <h1>{title}</h1>
     {children}
   </div>
 );
+
 export default Categories;

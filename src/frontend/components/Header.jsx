@@ -1,73 +1,67 @@
 import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import "./styles/Header.scss";
 import { Link } from "react-router-dom";
-import gravatar from "../utils/gravatar";
-import { logoutRequest } from "../actions";
-import "../assets/styles/components/Header.scss";
-import logo from "../assets/static/logo-platzi-video-BW2.png";
-import userIcon from "../assets/static/user-icon.png";
+import logo from "../assets/static/logo_kuru.png";
+import adduser from "../assets/static/add-user.png";
+import login from "../assets/static/log-in.png";
+import cart from "../assets/static/cart.png";
 
-const Header = (props) => {
-  const { user } = props;
-  const hasUser = Object.keys(user).length > 0;
-
-  const handleLogout = () => {
-    props.logoutRequest({});
-  };
-  return (
-    <header className="header">
-      <Link to="/">
-        <img
-          className="header__img"
-          src={logo}
-          alt="Logo Platzi Video"
-        />
-      </Link>
-      <div className="header__menu">
-        <div className="header__menu--profile">
-          {hasUser ? (
-            <img src={gravatar(user.email)} alt={user.email} />
-          ) : (
-            <img src={userIcon} alt="icono de usuario" />
-          )}
-          <p>Perfil</p>
+class Header extends React.Component {
+  render() {
+    return (
+      <header className="header">
+        <div className="header__content">
+          <Link to="/">
+            <img
+              className="header__content-logo"
+              src={logo}
+              alt="Logo e-commerce"
+            />
+          </Link>
+          <div className="header__content__search">
+            <input
+              className="header__content__search--input"
+              type="text"
+              placeholder="Qué estas buscando?"
+            />
+          </div>
+          <div className="header__content__profile">
+            <img src={adduser} alt="icono de Registro" />
+            <img src={login} alt="icono de Login" />
+            <img src={cart} alt="icono de Carrito" />
+          </div>
         </div>
-        <ul>
-          {hasUser ? (
-            <li>
-              <a href="#">user.name</a>
-            </li>
-          ) : null}
-          {hasUser ? (
-            <li>
-              <a href="#logout" onClick={handleLogout}>
-                Cerrar Sesión
+        <ul className="header__content__menu">
+          <li className="header__content__menu-item">
+            <Link to="/Category">
+              <a
+                className="App-link"
+                href="/category.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Eventos
               </a>
-            </li>
-          ) : (
-            <li>
-              <Link to="/login">Iniciar Sesión</Link>
-            </li>
-          )}
+            </Link>
+          </li>
+          <li className="header__content__menu-item">Música</li>
+          <li className="header__content__menu-item">
+            <Link to="/Tienda">
+              <a
+                className="App-link"
+                href="/category.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Tienda
+              </a>
+            </Link>
+          </li>
+          <li className="header__content__menu-item">Contact</li>
         </ul>
-      </div>
-    </header>
-  );
-};
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  };
-};
+      </header>
+    );
+  }
+}
 
-const mapDispatchToProps = {
-  logoutRequest
-};
-
-Header.propTypes = {
-  user: PropTypes.object,
-  logoutRequest: PropTypes.func,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

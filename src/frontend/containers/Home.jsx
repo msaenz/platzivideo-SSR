@@ -1,54 +1,64 @@
 import React from "react";
 import { connect } from "react-redux";
-import Search from "../components/Search";
+import "../assets/styles/index.scss";
+import "../components/styles/Home.scss";
+import News from "../components/News";
+import NewsItem from "../components/NewsItem";
 import Categories from "../components/Categories";
-import Carousel from "../components/Carousel";
-import CarouselItem from "../components/CarouselItem";
-// import "../assets/styles/App.scss";
+import Offers from "../components/Offers";
+import Card from "../components/Card";
+import ProductsOffer from "../components/OffersItem";
+import OffersItem from "../components/OffersItem";
 
-const Home = ({ myList, trends, originals }) => {
+const Home = ({ news, categories, offers, products }) => {
   return (
     <>
-      <Search isHome />
-      {myList !== undefined > 0 && (
-        <Categories title="Mi Lista">
-          <Carousel>
-            {myList.map((item) => (
-              <CarouselItem key={item.id} {...item} isList />
-            ))}
-          </Carousel>
+      <div className="container">
+        <News title="Noticias Kuru Studio">
+          {news.map((item) => (
+            <NewsItem
+              id={item.id}
+              key={item.id}
+              title={item.title}
+              subtitle={item.subtitle}
+              cover={item.cover}
+              type={item.type}
+              origin={item.origin}
+            />
+          ))}
+        </News>
+
+        <Categories title="Categorias">
+          {categories.map((item) => {
+            return (<Card key={item.idcategory} idcategory={item.idcategory} category={item.category} image={item.image} />);
+          })}
         </Categories>
-      )}
 
-      <Categories title="Tendencias">
-        <Carousel>
-          {trends.map((item) => (
-            <CarouselItem key={item.id} {...item} />
+        <Offers title="Ofertas Kuru">
+          {offers.map((item) => (
+            <OffersItem
+              key={item.idoffer}
+              idoffer={item.idoffer}
+              title={item.title}
+              subtitle={item.subtitle}
+              image={item.image}
+              priceorig={item.priceorig}
+              price={item.price}
+            />
           ))}
-        </Carousel>
-      </Categories>
-
-      <Categories title="Originales de Platzi Video">
-        <Carousel>
-          {originals.map((item) => (
-            <CarouselItem key={item.id} {...item} />
-          ))}
-        </Carousel>
-      </Categories>
+        </Offers>
+      </div>
     </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    myList: state.myList,
-    trends: state.trends,
-    originals: state.originals
+    //elementos que se necesitan del estado
+    news: state.news,
+    categories: state.categories,
+    offers: state.offers,
+    products: state.products
   };
 };
-//export default Home
-//export default connect(props, actions)(Home)
-export default connect(
-  mapStateToProps,
-  null
-)(Home);
+export default connect(mapStateToProps, null)(Home);

@@ -25,12 +25,38 @@ const reducer = (state, action) => {
         ...state,
         user: action.payload
       };
+    case "PROD_CATEGORY_REQUEST":
+      return {
+        ...state,
+        products: action.payload
+      };
     case "GET_VIDEO_SOURCE":
       return {
         ...state,
         playing:
-          state.trends.find((item) => item.id === Number(action.payload)) ||
-          state.originals.find((item) => item.id === Number(action.payload)) ||
+          state.news.find((item) => item.id === Number(action.payload)) ||
+          []
+      };
+    case "CHECK_PRODUCT":
+      return {
+        ...state,
+        prodbuy:
+          state.products.find((item) => item.idproducto === Number(action.payload)) ||
+        [{
+          "idproducto": 3,
+          "detail": "Discos",
+          "idcategory": 3,
+          "image": "/assets/products/MUGS.jpg",
+          "priceini": 50000,
+          "price": 20000,
+          "idmarca": 1,
+        }]
+      };
+    case "GET_PROD_CATEGORY":
+      return {
+        ...state,
+        products:
+          state.products.find((item) => item.idcategory === Number(action.payload)) ||
           []
       };
     default:

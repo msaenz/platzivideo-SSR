@@ -1,6 +1,8 @@
 import getManifest from "../getManifest";
 
-const files = getManifest();
+let files = false;
+if (process.env.NODE_ENV !== 'development') files = getManifest()
+// const files = getManifest();
 
 const render = (html, preloadedState) => {
   return (`
@@ -10,7 +12,7 @@ const render = (html, preloadedState) => {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Platzi Video SSR</title>
+        <title>Kuru Studio</title>
         <link rel='stylesheet' href="${files['main.css']}" type='text/css'></link>
       </head>
 

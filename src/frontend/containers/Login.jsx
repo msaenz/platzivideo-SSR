@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { loginRequest } from "../actions";
+import { loginUser } from "../actions";
 import "../assets/styles/components/Login.scss";
 import googleIcon from "../assets/static/google-icon.png";
 import twitterIcon from "../assets/static/twitter-icon.png";
@@ -10,21 +10,23 @@ const Login = (props) => {
   const [form, setValues] = useState({
     email: ""
   });
+
   const handleInput = (event) => {
     setValues({
       ...form,
       [event.target.name]: event.target.value
     });
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.loginRequest(form);
-    props.history.push("/");
+    props.loginUser(form, '/');
   };
+
   return (
     <section className="login">
       <section className="login__container">
-        <h2>Inicia sesión</h2>
+        <h2>Inicia sesións</h2>
         <form className="login__container--form" onSubmit={handleSubmit}>
           <input
             name="email"
@@ -33,6 +35,7 @@ const Login = (props) => {
             type="text"
             placeholder="Correo"
             onChange={handleInput}
+            required
           />
           <input
             name="password"
@@ -41,6 +44,7 @@ const Login = (props) => {
             type="password"
             placeholder="Contraseña"
             onChange={handleInput}
+            required
           />
           <button className="button" type="submit">Iniciar sesión</button>
           <div className="login__container--remember-me">
@@ -76,7 +80,7 @@ const Login = (props) => {
   );
 };
 const mapDispatchToProps = {
-  loginRequest
+  loginUser
 };
 
 export default connect(null, mapDispatchToProps)(Login);

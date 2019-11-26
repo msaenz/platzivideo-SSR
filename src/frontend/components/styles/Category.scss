@@ -1,0 +1,14 @@
+.container__category {
+  display: flex;
+  height: inherit; 
+  flex-direction: row;
+  justify-content: space-around;
+  height: inherit;
+}
+aside {
+  width: 20%;
+  // outline: 1px solid rgb(24, 207, 7);  
+}
+aside ul {
+  margin: 1em 2em;
+}
