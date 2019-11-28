@@ -1,32 +1,43 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getProdCategory } from "../actions";
+import { Link } from "react-router-dom";
+import { getProdCategory, checkProduct } from "../actions";
 import "./styles/Products.scss";
-import ProductsItem from "./ProductsItem";
 import NotFound from "../containers/NotFound";
 
 const Products = (props) => {
+  const { products } = props;
   const { id } = props.match.params;
-  const hasProducts = Object.keys(props.products).length > 0;
+  const handleAddToBuy = (product) => {
+    props.checkProduct(product);
+  };
+
+  const hasProducts = Object.keys(products).length > 0;
   useEffect(() => {
     props.getProdCategory(id);
   }, []);
+
   return hasProducts ? (
     <div className="container__products">
-      <h1>Productos</h1>
       <div className="products">
-        { props.products.map((item) => (
-          <ProductsItem
-            key={item._id}
-            _id={item._id}
-            idproducto={item.idproducto}
-            detail={item.detail}
-            idcategory={item.idcategory}
-            image={item.image}
-            priceini={item.priceini}
-            price={item.price}
-            idmarca={item.idmarca}
-          />
+        {products.map((product) => (
+          <div className="Products-item" key={product.idproducto}>
+            <img src={product.image} alt={product.detail} />
+            <div className="Products-item-info">
+              <h3>{product.detail}</h3>
+              <p className="Price-normal">
+                Precio Normal $
+                {Number(product.priceini).toLocaleString('es')}
+              </p>
+              <p className="Price-hoy">
+                Hoy $
+                {Number(product.price).toLocaleString('es')}
+              </p>
+            </div>
+            <Link to={`/product/${id}`}>
+              <button className="Products-buttom" type="button" onClick={() => handleAddToBuy(product)}>Comprar</button>
+            </Link>
+          </div>
         ))}
       </div>
     </div>
@@ -38,11 +49,13 @@ const Products = (props) => {
 const mapStateToProps = (state) => {
   return {
     products: state.products,
+    prodbuy: state.prodbuy,
   };
 };
 
 const mapDispatchToProps = {
-  getProdCategory
+  getProdCategory,
+  checkProduct
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

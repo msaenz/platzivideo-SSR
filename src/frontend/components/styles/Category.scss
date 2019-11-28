@@ -1,9 +1,15 @@
-.container__category {
-  display: flex;
-  height: inherit; 
-  flex-direction: row;
-  justify-content: space-around;
-  height: inherit;
+.category {
+  padding-left: 20px;
+}
+.category h1 {
+  text-align: center;
+}
+.category__container {
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+  grid-row-gap: 1em;
+  display: grid;
+  width: 100%;
 }
 aside {
   width: 20%;

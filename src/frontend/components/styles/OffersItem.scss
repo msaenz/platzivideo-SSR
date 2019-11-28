@@ -1,5 +1,5 @@
 .Offers-item {
-  outline: 1px solid black; 
+  // outline: 1px solid black; 
   /* height: 240px; */
   width: 357px;
   text-decoration: none;
@@ -31,6 +31,8 @@
   object-fit: contain;
 }
 .Offers-item button {
+  background-color: #A2195B;
+  color: white;
   width: 100%;
   padding: 10px;
   border-radius: 0px 0px 5px 5px;
@@ -42,4 +44,14 @@
 }      
 .Offers-item--info :hover {
   background-color: rgba(39,44,49,.06);
+}
+
+.Price-normal {
+  text-decoration: line-through;
+}
+
+.Price-hoy {
+  color: red;
+  font-weight: bold;
+  font-size: 1em;
 }

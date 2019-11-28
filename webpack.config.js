@@ -3,10 +3,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const autoprefixer = require("autoprefixer");
 const webpack = require("webpack");
 const dotenv = require("dotenv");
-// const TransferWebpackPlugin = require('transfer-webpack-plugin');
+const TransferWebpackPlugin = require('transfer-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
+
 dotenv.config();
 
 const isProd = (process.env.NODE_ENV === "production");

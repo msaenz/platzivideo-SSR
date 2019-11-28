@@ -1,15 +1,15 @@
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SET_FAVORITE":
+    case 'ADD_TO_CART':
       return {
         ...state,
-        myList: [...state.myList, action.payload]
-      };
-    case "DELETE_FAVORITE":
+        cart: [...state.cart, action.payload]
+      }
+    case 'DELETE_TO_CART':
       return {
         ...state,
-        myList: state.myList.filter((items) => items.id !== action.payload)
-      };
+        cart: state.cart.filter((items) => items.id !== action.payload)
+      }
     case "LOGIN_REQUEST":
       return {
         ...state,
@@ -40,17 +40,8 @@ const reducer = (state, action) => {
     case "CHECK_PRODUCT":
       return {
         ...state,
-        prodbuy:
-          state.products.find((item) => item.idproducto === Number(action.payload)) ||
-        [{
-          "idproducto": 3,
-          "detail": "Discos",
-          "idcategory": 3,
-          "image": "/assets/products/MUGS.jpg",
-          "priceini": 50000,
-          "price": 20000,
-          "idmarca": 1,
-        }]
+        prodbuy: action.payload ||
+        []
       };
     case "GET_PROD_CATEGORY":
       return {
@@ -58,6 +49,12 @@ const reducer = (state, action) => {
         products:
           state.products.find((item) => item.idcategory === Number(action.payload)) ||
           []
+      };
+    case "HANDLE_PAY_CART":
+      return {
+        ...state,
+        prodbuy: action.payload ||
+        []
       };
     default:
       return state;

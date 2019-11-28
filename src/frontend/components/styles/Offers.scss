@@ -1,7 +1,13 @@
 .offers {
+  padding-left: 20px;
+}
+
+.offers h1 {
+  text-align: center;
+}
+.offers__container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 0 5px;
   padding:  2em;
 }

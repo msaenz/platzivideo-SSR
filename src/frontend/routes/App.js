@@ -8,7 +8,7 @@ import Player from "../containers/Players";
 import Layout from "../components/Layout";
 import Products from "../components/Products";
 import Product from "../components/Product";
-import Tienda from "../components/Tienda";
+import Checkout from "../components/Ckeckout";
 
 const App = ({ isLogged }) => (
   <BrowserRouter>
@@ -19,8 +19,8 @@ const App = ({ isLogged }) => (
         <Route exact path="/register" component={Register} />
         <Route exact path="/products/:id" component={Products} />
         <Route exact path="/product/:id" component={Product} />
-        <Route exact path="/tienda" component={Tienda} />
         <Route exact path="/player/:id" component={Player} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

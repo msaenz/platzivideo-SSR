@@ -53,15 +53,7 @@ const main = async (req, res, next) => {
       initialState = {
         user,
         cart: [],
-        prodbuy: {
-          // "idproducto": 3,
-          // "detail": "Discos",
-          // "idcategory": 3,
-          // "image": "/assets/products/DISCOS.jpg",
-          // "priceini": 50000,
-          // "price": 20000,
-          // "idmarca": 1,
-        },
+        prodbuy: {},
         playing: {},
         news,
         offers,
@@ -82,7 +74,7 @@ const main = async (req, res, next) => {
     }
 
     // const isLogged = (initialState.user.id);
-    const isLogged = true;
+    const isLogged = false;
     const store = createStore(reducer, initialState);
     const html = renderToString(
       <Provider store={store}>

@@ -1,6 +1,16 @@
 import axios from "axios";
 // require("dotenv").config();
 
+export const addToCart = (payload) => ({
+  type: 'ADD_TO_CART',
+  payload,
+});
+
+export const deleteToCart = (payload) => ({
+  type: 'DELETE_TO_CART',
+  payload,
+})
+
 export const setFavorite = (payload) => ({
   type: "SET_FAVORITE",
   payload
@@ -46,13 +56,22 @@ export const checkProduct = (payload) => ({
   payload
 });
 
+export const handlePayCart = (payload) => ({
+  // let isLoggin = payload.user
+  // if (!isLoggin) {
+  //   alert("Debe autenticarse ")
+  // } else {
+  //   alert("Debe autenticarse "
+  // }
+  type: "HANDLE_PAY_CART",
+  payload
+});
+
 export const getProdCategory = (id) => {
-  console.log("Get prod cat", id)
   return (dispatch) => {
     axios
       .get(`/products/category/${id}`)
       .then(({ data }) => {
-        console.log(data);
         dispatch(prodCategoryRequest(data))
       })
       .catch((err) => dispatch(setError(err)));

@@ -9,11 +9,9 @@ aside ul {
   height: inherit;
 }
 .container__products h1 {
-  // outline: 1px solid yellow;
   text-align: center;
 }
 .products {
-  // outline: 1px solid red;
   display: flex;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1.5rem;
@@ -48,13 +46,11 @@ aside ul {
 }
 
 .Products-item {
-  // outline: 1px solid black;
   // height: 300px;
   width: 250px;
   text-decoration: none;
   box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
   border-radius: 5px;
-  // margin: 0 10px 20px 0;
   position: relative;
 }    
 .Products-item--info {
@@ -91,4 +87,19 @@ aside ul {
 }      
 .Products-item--info :hover {
   background-color: rgba(39,44,49,.06);
+}
+
+.Price-normal {
+  text-decoration: line-through;
+}
+
+.Price-hoy {
+  color: red;
+  font-weight: bold;
+}
+
+.Products-buttom {
+  background-color: #A2195B;
+  color: white;
+  font-size: 1.3em;
 }

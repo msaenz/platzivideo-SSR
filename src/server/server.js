@@ -85,9 +85,7 @@ app.post("/api/auth/sign-in", async (req, res, next) => {
         if (error) {
           next(error);
         }
-        console.log("Datos autenticación  server", data)
         const { token, ...user } = data;
-
         res.cookie("token", token, {
           httpOnly: !(ENV === "development"),
           secure: !(ENV === "development"),
@@ -102,11 +100,8 @@ app.post("/api/auth/sign-in", async (req, res, next) => {
 
 // app.post("/api/auth/sign-up", async (req, res, next) => {
 app.post("/auth/sign-up", async (req, res, next) => {
-  console.log("Registro Usuario server?")
   const { body: user } = req;
-  console.log("User", user)
   try {
-    console.log("URL", `${process.env.API_URL}/api/auth/sign-up`)
     const userData = await axios({
       url: `${process.env.API_URL}/api/auth/sign-up`,
       method: "post",
@@ -125,16 +120,12 @@ app.post("/auth/sign-up", async (req, res, next) => {
 });
 
 app.get("/products/category/:id", async (req, res, next) => {
-  console.log("Registro Usuario server?")
   const { id } = req.params;
-  console.log("Categoria", id)
   try {
-    console.log("URL", `${process.env.API_URL}/api/products/category/${id}`)
     const prodCatg = await axios({
       url: `${process.env.API_URL}/api/products/category/${id}`,
       method: "get",
     });
-    console.log("Datos...", prodCatg.data)
     const { data } = prodCatg.data;
     res.status(200).json(data);
   } catch (error) {

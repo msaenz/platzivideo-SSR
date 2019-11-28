@@ -4,7 +4,9 @@ import "./styles/Offers.scss";
 const Offers = ({ children, title }) => (
   <div className="offers">
     <h1>{title}</h1>
-    {children}
+    <div className="offers__container">
+      {children}
+    </div>
   </div>
 );
 

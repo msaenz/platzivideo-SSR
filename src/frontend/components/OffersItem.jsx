@@ -6,7 +6,6 @@ import "./styles/OffersItem.scss";
 
 const OffersItem = (props) => {
   const handleAddToBuy = (product) => {
-    console.log("Se activo boton")
     props.checkProduct(product);
   }
   const { _id, idoffer, title, subtitle, image, priceorig, price } = props;
@@ -17,13 +16,19 @@ const OffersItem = (props) => {
         <h3>
           {title}
         </h3>
-        <p>{priceorig}</p>
-        <p>{price}</p>
+        <p className="Price-normal">
+          Precio Normal$
+          {Number(priceorig).toLocaleString('es')}
+        </p>
+        <p className="Price-hoy">
+          Hoy$
+          {Number(price).toLocaleString('es')}
+        </p>
         <p>{subtitle}</p>
       </div>
       <Link to={`/product/${_id}`}>
-        <button type="button" onClick={() => handleAddToBuy({ _id })}>
-          Comprar {idoffer }
+        <button type="button" onClick={() => handleAddToBuy({ product })}>
+          Comprar
         </button>
       </Link>
     </div>

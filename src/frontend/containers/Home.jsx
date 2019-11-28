@@ -7,7 +7,6 @@ import NewsItem from "../components/NewsItem";
 import Categories from "../components/Categories";
 import Offers from "../components/Offers";
 import Card from "../components/Card";
-import ProductsOffer from "../components/OffersItem";
 import OffersItem from "../components/OffersItem";
 
 const Home = ({ news, categories, offers, products }) => {

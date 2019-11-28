@@ -4,8 +4,7 @@ import Login from "../containers/Login";
 import Player from "../containers/Players";
 import Products from "../components/Products";
 import Product from "../components/Product";
-import Tienda from "../components/Tienda";
-
+import Checkout from "../components/Ckeckout";
 import NotFound from "../containers/NotFound";
 
 const serverRoutes = (isLogged) => {
@@ -46,8 +45,8 @@ const serverRoutes = (isLogged) => {
       exact: true
     },
     {
-      path: "/tienda",
-      component: Tienda,
+      path: "/checkout",
+      component: Checkout,
       exact: true
     },
     {

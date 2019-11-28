@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
-import { getProdCategory } from "../actions";
+// import { getProdCategory } from "../actions";
 
 import "./styles/Card.scss";
 
@@ -20,12 +20,8 @@ const Card = (props) => {
 const mapStateToProps = (state) => {
   return {
     //elementos que se necesitan del estado
-    products: state.products
+    categories: state.categories
   };
 };
 
-const mapDispatchToProps = {
-  getProdCategory
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default connect(mapStateToProps, null)(Card);
